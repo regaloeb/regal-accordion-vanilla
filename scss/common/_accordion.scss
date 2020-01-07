@@ -1,0 +1,62 @@
+.accordion{
+	list-style: none;
+	
+	.open-close{
+		cursor: pointer;
+		border-bottom: .1rem solid $black;
+		margin-top: .5rem;
+		margin-bottom: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 1.8rem;
+		line-height: 1.4;
+		transition:	color $speed2 $defaultEase;
+		
+		@include tablet-to-large{
+			font-size: 3rem;
+		}
+		
+		.title{
+			padding-right: 2rem;
+			padding-bottom: 1rem;
+		}
+		
+		.picto{
+			width: 5rem;
+			padding-right: 1rem;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		svg{
+			transition: transform $speed2 $defaultEase;
+			path{
+				transition:	stroke $speed2 $defaultEase;
+			}
+		}
+		
+		&.js-opened{
+			color: $highlight;
+			
+			svg{
+				transform: rotate(90deg);
+				
+				path{
+					stroke: $highlight;
+				}
+			}
+		}
+	}
+	
+	.desc{
+		overflow: hidden;
+		transition: max-height $speed2 $defaultEase;
+	}
+	
+	.desc-cont{
+		overflow: auto;
+	}
+}
