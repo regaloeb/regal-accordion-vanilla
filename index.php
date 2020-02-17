@@ -38,15 +38,14 @@
 						Conteneur principal avec classe <strong>.accordion</strong><br>
 						Attribut <strong>data-default</strong> détermine l'état par défaut&nbsp;: "opened", les accordéons sont ouverts / "closed", ils sont fermés.<br>
 						Attribut <strong>data-only-one</strong> détermine si on peut ouvrir plusieurs volets&nbsp;: "true", on ne peut pas! / "false" (ou pas d'attribut), on peut.<br>
-						Chaque enfant doit contenir&nbsp;:<br>
+						Chaque enfant de ce bloc .accordion est un volet et doit contenir&nbsp;:<br>
 						&nbsp;&nbsp;&nbsp;&nbsp;Un élément avec classe <strong>.open-close</strong><br>
-						&nbsp;&nbsp;&nbsp;&nbsp;Un élément avec classe <strong>.desc</strong><br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Un élément avec classe <strong>.desc-cont</strong> (pour le calcul de la hauteur)
+						&nbsp;&nbsp;&nbsp;&nbsp;Un élément avec classe <strong>.accordion-desc</strong> qui doit contenir un élément avec classe <strong>.desc-cont</strong> (pour le calcul de la hauteur)
 						<div class="code">
 &lt;ul <strong>class="accordion" data-default="closed" data-only-one="true"</strong>><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;li><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2 <strong>class="open-close"</strong>>&lt;span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.&lt;/span>&lt;span class="picto">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22">&lt;path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/>&lt;/svg>&lt;/span>&lt;/h2><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="desc"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="accordion-desc"><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="desc-cont"><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p>Ex est mundi ridens utamur etc.&lt;/p><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br>
@@ -68,22 +67,29 @@
 					</p>
 					<h2>Javascript</h2>
 					<p>
-						Inclure le constructeur Vanilla <strong><a href="js/regal-accordion-vanilla.min.js" target="_blank">regal-accordion-vanilla.min.js</a></strong> (2.02Ko)<br>
+						Inclure le constructeur Vanilla <strong><a href="js/regal-accordion-vanilla.min.js" target="_blank">regal-accordion-vanilla.min.js</a></strong> (2.23Ko)<br>
 						Version non minifiée&nbsp;: <strong><a href="js/regal-accordion-vanilla.js" target="_blank">regal-accordion-vanilla.js</a></strong>
 						<div class="code">
 						&lt;script src="js/regal-accordion-vanilla.min.js">&lt;/script>
 						</div>
 						
-						Déclarer les accordéons&nbsp;:
+						<h3>Déclarer les accordéons&nbsp;:</h3>
 						<div class="code">
 var accordions = document.querySelectorAll('.accordion');<br>
 if(accordions){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;accordions.forEach(function(elt){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new RegalAccordion(elt);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>elt.acc</strong> = new RegalAccordion(elt);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 }<br>
 						</div>
-						C'est tout&nbsp;!
+						Je stocke l'objet RegalAccordion dans l'élément HTML lui-même (elt.acc) de façon à pouvoir en appeler facilement les méthodes publiques.
+						<br><br>
+						<h3>Méthodes publiques&nbsp;:</h3><br>
+						Pour détruire l'accordéon.
+						<span class="code">elt.acc.destroy()</span><br>
+						Pour updater la hauteur de l'accordéon si jamais son contenu change.
+						<span class="code">elt.acc.slideDown()</span><br>
+						Et voilà&nbsp;!
 					</p>
 					<h2>Démos</h2>
 					<p style="margin-top:2rem; margin-bottom:0;">
@@ -92,7 +98,7 @@ if(accordions){<br>
 					<ul class="accordion" data-default="closed" data-only-one="true">
 						<li>
 							<h2 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
 									<p>Ex est mundi ridens utamur, vel equidem volumus eu, nec ne putant commodo necessitatibus. Mutat euripidis est cu, ad usu veniam option accusata. Ut ipsum virtute numquam mei, mei suas adipisci ne. Sit stet molestie in, prima nemore et duo. Eum wisi porro similique ne, eum ea modus aperiam. Ea dico iriure aliquando cum, mel prima platonem dissentias at, sit te vocent facilisi deserunt. Cu omnes facilisi prodesset mei.</p>
@@ -102,7 +108,7 @@ if(accordions){<br>
 						</li>
 						<li>
 							<h2 class="open-close"><span class="title">Ex est mundi ridens utamur, vel equidem volumus eu</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
 									<p>His in novum corrumpit. Ei cetero assueverit usu. In duis discere fabulas duo, an everti commodo ius. Scaevola argumentum in duo. Vocent fastidii reprimique his id, ex usu nullam timeam molestie, affert similique cu his.</p>
@@ -119,7 +125,7 @@ if(accordions){<br>
 					<ul class="accordion" data-default="closed" data-only-one="false">
 						<li>
 							<h2 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
 									<p>Ex est mundi ridens utamur, vel equidem volumus eu, nec ne putant commodo necessitatibus. Mutat euripidis est cu, ad usu veniam option accusata. Ut ipsum virtute numquam mei, mei suas adipisci ne. Sit stet molestie in, prima nemore et duo. Eum wisi porro similique ne, eum ea modus aperiam. Ea dico iriure aliquando cum, mel prima platonem dissentias at, sit te vocent facilisi deserunt. Cu omnes facilisi prodesset mei.</p>
@@ -130,7 +136,7 @@ if(accordions){<br>
 						</li>
 						<li>
 							<h2 class="open-close" data-default="open"><span class="title">Ex est mundi ridens utamur, vel equidem volumus eu</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
 									<p>His in novum corrumpit. Ei cetero assueverit usu. In duis discere fabulas duo, an everti commodo ius. Scaevola argumentum in duo. Vocent fastidii reprimique his id, ex usu nullam timeam molestie, affert similique cu his.</p>
@@ -141,7 +147,7 @@ if(accordions){<br>
 						</li>
 						<li>
 							<h2 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
 									<p>Ex est mundi ridens utamur, vel equidem volumus eu, nec ne putant commodo necessitatibus. Mutat euripidis est cu, ad usu veniam option accusata. Ut ipsum virtute numquam mei, mei suas adipisci ne. Sit stet molestie in, prima nemore et duo. Eum wisi porro similique ne, eum ea modus aperiam. Ea dico iriure aliquando cum, mel prima platonem dissentias at, sit te vocent facilisi deserunt. Cu omnes facilisi prodesset mei.</p>
@@ -157,7 +163,7 @@ if(accordions){<br>
 					<ul class="accordion" data-default="opened">
 						<li>
 							<h2 class="open-close"><span class="title">Ne dolore scripta verterem sea, ex altera tincidunt quo</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
 									<p>
@@ -168,7 +174,7 @@ if(accordions){<br>
 						</li>
 						<li>
 							<h2 class="open-close"><span class="title">Sonet possit placerat no has</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
-							<div class="desc">
+							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem;">
 									<p>
@@ -184,7 +190,7 @@ if(accordions){<br>
 			
 		</main>
 		
-		<script src="js/regal-accordion-vanilla.min.js"></script>
+		<script src="js/regal-accordion-vanilla.js"></script>
 		<script src="js/general.js"></script>
 	</body>
 </html>

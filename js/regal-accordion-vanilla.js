@@ -31,7 +31,7 @@ var RegalAccordion = function(selector, options){
 	plugin.o = Object.assign({}, defaults, options);
 	
 	var elt = plugin.el;
-	var desc = elt.querySelectorAll('.desc');
+	var desc = elt.querySelectorAll('.accordion-desc');
 	var op = elt.querySelectorAll('.open-close');
 	var onlyOne = elt.getAttribute('data-only-one');
 	op.forEach(function(el){
@@ -39,28 +39,29 @@ var RegalAccordion = function(selector, options){
 	});
 	//open-close action
 	op.forEach(function(el){
-		el.addEventListener('click', function(e){
-			e.preventDefault();
-			var d = e.currentTarget.parentNode.querySelector('.desc');
-			var onlyone = e.currentTarget.getAttribute('data-only-one');
-			if(e.currentTarget.classList.contains('js-closed')){
-				if(onlyone === 'true'){
-					var toclose = e.currentTarget.closest('.accordion').querySelector('.open-close.js-opened');
-					if(toclose){
-						triggerEvent(toclose, 'click');
-					}
-				}
-				slideDown(d);
-				e.currentTarget.classList.add('js-opened');
-				e.currentTarget.classList.remove('js-closed');
-			}
-			else{
-				slideUp(d);
-				e.currentTarget.classList.remove('js-opened');
-				e.currentTarget.classList.add('js-closed');
-			}
-		});
+		el.addEventListener('click', openClose);
 	});
+	function openClose(e){
+		e.preventDefault();
+		var d = e.currentTarget.parentNode.querySelector('.accordion-desc');
+		var onlyone = e.currentTarget.getAttribute('data-only-one');
+		if(e.currentTarget.classList.contains('js-closed')){
+			if(onlyone === 'true'){
+				var toclose = elt.querySelector('.open-close.js-opened');
+				if(toclose){
+					triggerEvent(toclose, 'click');
+				}
+			}
+			slideDown(d);
+			e.currentTarget.classList.add('js-opened');
+			e.currentTarget.classList.remove('js-closed');
+		}
+		else{
+			slideUp(d);
+			e.currentTarget.classList.remove('js-opened');
+			e.currentTarget.classList.add('js-closed');
+		}
+	};
 	//default state
 	var defaultState = elt.getAttribute('data-default');
 	if(defaultState == 'closed'){
@@ -90,10 +91,10 @@ var RegalAccordion = function(selector, options){
 			h = h + elt.getBoundingClientRect().height;
 		});
 		elem.style.maxHeight = h + 'px';
-	}
+	};
 	function slideUp(elem) {
 		elem.style.maxHeight = '0';
-	}
+	};
 	function triggerEvent(el, type){
 	   if ('createEvent' in document) {
 			var e = document.createEvent('HTMLEvents');
@@ -105,5 +106,18 @@ var RegalAccordion = function(selector, options){
 			e.eventType = type;
 			el.fireEvent('on' + e.eventType, e);
 		}
-	}
+	};
+	plugin.destroy = function(){
+		op.forEach(function(el){
+			el.removeEventListener('click', openClose);
+			el.classList.add('js-closed');
+			el.classList.remove('js-opened');
+		});
+		desc.forEach(function(el){
+			el.style.maxHeight = '100000000px';
+		});
+	};
+	plugin.slideDown = function(elem){
+		slideDown(elem);
+	};
 }
