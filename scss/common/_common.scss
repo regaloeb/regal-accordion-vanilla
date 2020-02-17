@@ -43,7 +43,22 @@ h1{
 	font-size: 3rem;
 	@include tablet-to-large{
 		font-size: 5rem;
-	} 
+	}
+}
+
+.picto-link{
+	color: $blue;
+	text-decoration: none;
+	
+	.picto{
+		path{
+			fill: $blue;
+		}
+	}
+	
+	&:hover{
+		text-decoration: underline;
+	}
 }
 
 
