@@ -43,47 +43,49 @@
 						Chaque enfant de ce bloc .accordion est un volet et doit contenir&nbsp;:<br>
 						&nbsp;&nbsp;&nbsp;&nbsp;Un élément avec classe <strong>.open-close</strong><br>
 						&nbsp;&nbsp;&nbsp;&nbsp;Un élément avec classe <strong>.accordion-desc</strong> qui doit contenir un élément avec classe <strong>.desc-cont</strong> (pour le calcul de la hauteur)
-						<div class="code">
-&lt;ul <strong>class="accordion" data-default="closed" data-only-one="true"</strong>><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;li><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2 <strong>class="open-close"</strong>>&lt;span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.&lt;/span>&lt;span class="picto">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22">&lt;path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/>&lt;/svg>&lt;/span>&lt;/h2><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="accordion-desc"><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="desc-cont"><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p>Ex est mundi ridens utamur etc.&lt;/p><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;li><br>
-&nbsp;&nbsp;&nbsp;&nbsp;etc.<br>
-&lt;/ul><br>				
-						</div>
+						<span class="code">
+&lt;ul <strong>class="accordion" data-default="closed" data-only-one="true"</strong>>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2 <strong>class="open-close"</strong>>&lt;span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.&lt;/span>&lt;span class="picto">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22">&lt;path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/>&lt;/svg>&lt;/span>&lt;/h2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="accordion-desc">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="desc-cont">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p>Ex est mundi ridens utamur etc.&lt;/p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li>
+&nbsp;&nbsp;&nbsp;&nbsp;etc.
+&lt;/ul>				
+						</span>
 					</p>
 					<h2>CSS</h2>
 					<p>
-						Le seul pré-requis concerne l'élément <stronG>.desc</strong>&nbsp;:
-						<div class="code">
-						overflow: hidden;<br>
-						transition: max-height $speed1 $defaultEase;
-						</div>
+						Le seul pré-requis concerne l'élément <stronG>.accordion-desc</strong>&nbsp;:
+						<span class="code">
+overflow: hidden;
+transition: max-height $speed1 $defaultEase;
+						</span>
 						Le reste, c'est de l'habillage&nbsp;: <a href="scss/common/_accordion.scss" target="_blank">scss/common/_accordion.scss</a>
 					</p>
 					<h2>Javascript</h2>
+					<ul class="bullets bullets-links">
+						<li>Inclure le constructeur Vanilla <a href="js/regal-accordion-vanilla.min.js" target="_blank">regal-accordion-vanilla.min.js</a> (2.23Ko)<br><l/i>
+						<li>Version non minifiée&nbsp;: <a href="js/regal-accordion-vanilla.js" target="_blank">regal-accordion-vanilla.js</a></li>
+					</ul>
 					<p>
-						Inclure le constructeur Vanilla <a href="js/regal-accordion-vanilla.min.js" target="_blank">regal-accordion-vanilla.min.js</a> (2.23Ko)<br>
-						Version non minifiée&nbsp;: <a href="js/regal-accordion-vanilla.js" target="_blank">regal-accordion-vanilla.js</a>
-						<div class="code">
-						&lt;script src="js/regal-accordion-vanilla.min.js">&lt;/script>
-						</div>
+						<span class="code">
+&lt;script src="js/regal-accordion-vanilla.min.js">&lt;/script>
+						</span>
 						
 						<h3>Déclarer les accordéons&nbsp;:</h3>
-						<div class="code">
-var accordions = document.querySelectorAll('.accordion');<br>
-if(accordions){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;accordions.forEach(function(elt){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>elt.acc</strong> = new RegalAccordion(elt);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-}<br>
-						</div>
+						<span class="code">
+var accordions = document.querySelectorAll('.accordion');
+if(accordions){
+&nbsp;&nbsp;&nbsp;&nbsp;accordions.forEach(function(elt){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>elt.acc</strong> = new RegalAccordion(elt);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+						</span>
 						Je stocke l'objet RegalAccordion dans l'élément HTML lui-même (elt.acc) de façon à pouvoir en appeler facilement les méthodes publiques.
 						<br><br>
 						<h3>Méthodes publiques&nbsp;:</h3><br>
@@ -99,7 +101,7 @@ if(accordions){<br>
 					</p>
 					<ul class="accordion" data-default="closed" data-only-one="true">
 						<li>
-							<h2 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close"><span class="title">Labore explicari temporibus ut nam.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
@@ -109,7 +111,7 @@ if(accordions){<br>
 							</div>
 						</li>
 						<li>
-							<h2 class="open-close"><span class="title">Ex est mundi ridens utamur, vel equidem volumus eu</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close"><span class="title">Ex est mundi ridens utamur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
@@ -126,7 +128,7 @@ if(accordions){<br>
 					</p>
 					<ul class="accordion" data-default="closed" data-only-one="false">
 						<li>
-							<h2 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close"><span class="title">Labore solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
@@ -137,7 +139,7 @@ if(accordions){<br>
 							</div>
 						</li>
 						<li>
-							<h2 class="open-close" data-default="open"><span class="title">Ex est mundi ridens utamur, vel equidem volumus eu</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close" data-default="open"><span class="title">Ex vel equidem volumus eu</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
@@ -148,7 +150,7 @@ if(accordions){<br>
 							</div>
 						</li>
 						<li>
-							<h2 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in solet eruditi gloriatur.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close"><span class="title">Labore explicari temporibus ut nam, qui in.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
@@ -164,7 +166,7 @@ if(accordions){<br>
 					</p>
 					<ul class="accordion" data-default="opened">
 						<li>
-							<h2 class="open-close"><span class="title">Ne dolore scripta verterem sea, ex altera tincidunt quo</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close"><span class="title">Ne dolore scripta verterem sea.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux-glabre.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
@@ -175,7 +177,7 @@ if(accordions){<br>
 							</div>
 						</li>
 						<li>
-							<h2 class="open-close"><span class="title">Sonet possit placerat no has</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h2>
+							<h3 class="open-close"><span class="title">Sonet possit placerat no ha.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem;">
