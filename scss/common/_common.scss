@@ -20,6 +20,7 @@ body{
 	background: $white;
 	-webkit-font-smoothing: antialiased;
 	width: 100%;
+	overflow-y: scroll;
 }
 
 .code{
@@ -44,8 +45,8 @@ h1, h2, h3, h4{
 	margin-top: 0;
 	line-height: 1.4;
 	text-rendering: optimizeLegibility;
-	font-family: $specialFont;
 	font-weight: 100;
+	font-family: $specialFont;
 }
 
 h1{
@@ -163,46 +164,63 @@ a{
 	}
 }
 
+.hide{
+	position: absolute;
+	left: -100000px;
+	top: -10000px;
+}
+
+.page-content{
+	transition: transform $speed2 $defaultEase;
+	position: relative;
+	padding: 2rem 1rem 0 1rem;
+	
+	@media (min-width: 810px){
+		padding: 3rem 0 0 0;
+	}
+	
+	&.mobile-nav-active{
+		transform: translateX(100%);
+	}
+	
+	.section:last-child{
+		margin-bottom: 0;
+	}
+}
+
 .section{
 	width: 100%;
-	
+	margin: 0 auto 3.5rem auto;
+	position: relative;
+
 	&:focus{
 		outline: none;
 	}
 }
 
 .section-inner{
+	width: 100%;
 	max-width: $maxWidthSection;
-	margin: auto;
-	padding: 3rem $sectionPadding;
+	margin: 0 auto;
+	padding: 3rem; //$sectionPadding;
 }
 
 .no-mobile{
 	display: none;
 }
 
-.intro{
-	position: relative;
-	z-index: 1998;
-	background: url() no-repeat 50% 100%;
-	background-size: cover;
-	background-attachment: fixed;
-	width: 100vw;
-	min-height: 100vh;
-	transition: opacity $speed1 ease-out;
-	padding: 7rem 1rem 5rem 1rem;
-	overflow: hidden;
+.js-reveal{
+	transform: translateX(-3rem);
+	transform-origin: 0 0;
+	opacity: 0;
+	transition: transform $speed2 $easeOutSine, opacity $speed2 $easeOutSine;
 	
-	p{
-		background: rgba(0,0,0,0.75);
-		color: $white;
-		padding: 2rem 3rem 2rem 2rem;
-		width: 100%;
-		margin-bottom: 2rem;
-		text-align: left;
+	&.revealed{
+		transform: none;
+		opacity: 1;
+		transition: transform $speed2 $easeOutSine, opacity $speed2 $easeOutSine;
 	}
 }
-
 
 @media (min-width: $tablet-portrait){
 	

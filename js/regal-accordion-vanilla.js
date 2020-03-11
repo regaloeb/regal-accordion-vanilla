@@ -1,6 +1,5 @@
 var RegalAccordion = function(selector, options){
 	var plugin = this;
-	
 	plugin.el = (typeof(selector) === 'object') ? selector : (selector.indexOf('#') >= 0) ? document.getElementById(selector.replace('#', '')) : document.querySelector(selector);
 	
 	var defaults = {
@@ -34,9 +33,24 @@ var RegalAccordion = function(selector, options){
 	var desc = elt.querySelectorAll('.accordion-desc');
 	var op = elt.querySelectorAll('.open-close');
 	var onlyOne = elt.getAttribute('data-only-one');
-	op.forEach(function(el){
-		el.setAttribute('data-only-one', onlyOne);
-	});
+	//Open accordion by anchor in location
+	var reqId = window.location.hash.replace('#', '');
+	var reqEl = (reqId !== '') ? document.getElementById(reqId) : false;
+	if(reqEl){
+		//make sure reqEl is inside the RegalAccordion
+		reqEl = elt.contains(document.getElementById(reqId)) ? document.getElementById(reqId) : false
+		//avoid scroll to anchor for accordions
+        window.scrollTo(0, 0);         // execute it straight away
+        setTimeout(function() {
+            window.scrollTo(0, 0);     // run it a bit later also for browser compatibility
+        }, 1);
+	}
+	
+	if(onlyOne){
+		op.forEach(function(el){
+			el.setAttribute('data-only-one', onlyOne);
+		});
+	}
 	//open-close action
 	op.forEach(function(el){
 		el.addEventListener('click', openClose);
@@ -63,28 +77,70 @@ var RegalAccordion = function(selector, options){
 		}
 	};
 	//default state
-	var defaultState = elt.getAttribute('data-default');
-	if(defaultState == 'closed'){
-		op.forEach(function(el){
-			el.classList.add('js-closed');
-		});
-		desc.forEach(function(el){
-			slideUp(el);
-		});
-		//on ouvre le volet data-default="open"
-		var defopened = elt.querySelector('.open-close[data-default=open]');
-		if(defopened){
-			triggerEvent(defopened, 'click');
+	function setDefaultState(){
+		var defaultState = elt.getAttribute('data-default');
+		if(defaultState == 'closed'){
+			op.forEach(function(el){
+				el.classList.add('js-closed');
+			});
+			desc.forEach(function(el){
+				slideUp(el);
+			});
+			//on ouvre le volet data-default="open" sauf si il y a une ancre valide
+			var defopened;
+			if(reqEl){ 
+				if(reqEl.classList.contains('open-close')){
+					defopened = reqEl;
+				}
+				else{
+					defopened = reqEl.querySelector('.open-close.js-closed') || reqEl.closest('.accordion-desc').parentNode.querySelector('.open-close.js-closed') || false;
+				}
+			}
+			else{
+				defopened = elt.querySelector('.open-close[data-default=open]');
+			}
+			if(defopened){
+				triggerEvent(defopened, 'click');
+			}
 		}
-	}
-	else{
+		else{
+			op.forEach(function(el){
+				el.classList.add('js-opened');
+			});
+			desc.forEach(function(el){
+				slideDown(el);
+			});
+		}
+	};
+	setDefaultState();
+	function windowLoad(){
+		setTimeout(function(){
+			//to make sure everything is loaded, especially images
+			resizeOpenedOnes();
+		}, 500);
+	};
+	window.addEventListener('load', windowLoad);
+	//eventListeners
+	//wait until resize is done
+	window.addEventListener('resize', function() {
+		if(this.resizeTO) clearTimeout(this.resizeTO);
+		this.resizeTO = setTimeout(function() { 
+			triggerEvent(this, 'resizeEnd');
+		}, 500);
+	});
+	//resize
+	function resizeOpenedOnes(){
 		op.forEach(function(el){
-			el.classList.add('js-opened');
+			if(el.classList.contains('js-opened')){
+				var d = el.parentNode.querySelector('.accordion-desc');
+				slideDown(d);
+			}
 		});
-		desc.forEach(function(el){
-			slideDown(el);
-		});
-	}
+	};
+	function resize(){
+		resizeOpenedOnes();
+	};
+	window.addEventListener('resizeEnd', resize);
 	function slideDown(elem) {
 		var h = 0;
 		elem.children.forEach(function(elt){
@@ -120,4 +176,5 @@ var RegalAccordion = function(selector, options){
 	plugin.slideDown = function(elem){
 		slideDown(elem);
 	};
-}
+	return plugin;
+};

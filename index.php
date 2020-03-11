@@ -92,8 +92,12 @@ if(accordions){
 						Pour détruire l'accordéon.
 						<span class="code">elt.acc.destroy()</span><br>
 						Pour updater la hauteur de l'accordéon si jamais son contenu change.
-						<span class="code">elt.acc.slideDown()</span><br>
-						Et voilà&nbsp;!
+						<span class="code">elt.acc.slideDown()</span>
+					</p>
+					<h2>Forcer ouverture d'un volet avec une ancre dans l'URL</h2>
+					<p>
+						On peut aussi forcer l'ouverture d'un volet en passant une ancre dans l'URL.<br>
+						Si l'objet RegalAccordion contient un élément avec un identifiant identique à l'ancre, le volet correspondant est ouvert. L'élément identifié peut être celui avec classe <strong>.open-close</strong> ou tout autre élément contenu dans l'élément <strong>.accordion-desc</strong>.
 					</p>
 					<h2>Démos</h2>
 					<p style="margin-top:2rem; margin-bottom:0;">
@@ -101,7 +105,7 @@ if(accordions){
 					</p>
 					<ul class="accordion" data-default="closed" data-only-one="true">
 						<li>
-							<h3 class="open-close"><span class="title">Labore explicari temporibus ut nam.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
+							<h3 class="open-close" id="ancre"><span class="title">Labore explicari temporibus ut nam.</span><span class="picto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 21" width="12" height="22"><path fill="none" stroke="#000000" stroke-miterlimit="10" d="M.5 1l10.504 9.629L.5 20.112"/></svg></span></h3>
 							<div class="accordion-desc">
 								<div class="desc-cont">
 									<img src="img/photo-sourire-vieux.jpg" alt="une image" style="float:left; margin-right: 2rem; margin-bottom: 0;">
